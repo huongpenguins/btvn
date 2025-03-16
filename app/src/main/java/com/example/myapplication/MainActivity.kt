@@ -36,10 +36,14 @@ class MainActivity : AppCompatActivity() {
     fun clickOperator(view: View) {
         val thisButton = view as Button
         var operator = thisButton.text.toString()
-        if (operator == "X") operator = "*"
-        if (temp.isDigitsOnly()) {
+        if (operator == "X" || operator == "x") operator = "*"
+
+        if (input.isNotEmpty() && input.last().isDigit()) {
             input += operator
             temp = operator
+            textView01.text = input
+        } else if (input.isNotEmpty() && !input.last().isDigit()) {
+            input = input.dropLast(1) + operator
             textView01.text = input
         }
     }
